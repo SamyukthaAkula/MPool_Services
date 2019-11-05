@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="51f5c099e3474a0083aefd27e8fb823c" Name="Diagram1">
+        <EntityTypeShape EntityType="MPOOL_HackathonModel.BloodGroup" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MPOOL_HackathonModel.BRANCH" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MPOOL_HackathonModel.City" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MPOOL_HackathonModel.Country" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MPOOL_HackathonModel.LOGIN" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MPOOL_HackathonModel.Routing" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MPOOL_HackathonModel.State" Width="1.5" PointX="7.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MPOOL_HackathonModel.UserAddress" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="MPOOL_HackathonModel.USER" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MPOOL_HackathonModel.VEHICLE_INFO" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
+        <AssociationConnector Association="MPOOL_HackathonModel.FK__LOGINS__UserId__66603565" ManuallyRouted="false" />
+        <AssociationConnector Association="MPOOL_HackathonModel.FK__UserAddre__UserI__6B24EA82" ManuallyRouted="false" />
+        <AssociationConnector Association="MPOOL_HackathonModel.FK__VEHICLE_I__UserI__693CA210" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MPOOL_HackathonModel.PoolerDeparture" Width="1.5" PointX="3" PointY="10.25" />
+        <AssociationConnector Association="MPOOL_HackathonModel.FK__PoolerDep__TimeO__7E37BEF6" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

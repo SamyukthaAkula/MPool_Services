@@ -1,0 +1,564 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MPOOL_HackathonModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BloodGroups">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BloodGroup" Type="varchar" MaxLength="20" />
+          <Property Name="BloodGroupCode" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="BRANCHES">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Branch" Type="varchar" MaxLength="30" />
+          <Property Name="BranchId" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Cities">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StateCode" Type="varchar" MaxLength="20" />
+          <Property Name="City" Type="varchar" MaxLength="50" />
+          <Property Name="CityCode" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Country" Type="varchar" MaxLength="50" />
+          <Property Name="CountryCode" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="LOGINS">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" />
+          <Property Name="UserPassword" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'MPOOL_Hackathon.dbo.PoolerDeparture' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PoolerDeparture">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="RoutingID" Type="int" />
+          <Property Name="SeatsAvailable" Type="int" />
+          <Property Name="TimeOfDeparture" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Routing">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BranchId" Type="int" />
+          <Property Name="Routing" Type="varchar" MaxLength="200" />
+          <Property Name="RouteID" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="States">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CountryCode" Type="varchar" MaxLength="20" />
+          <Property Name="UserState" Type="varchar" MaxLength="50" />
+          <Property Name="StateCode" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="UserAddress">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="UserAddress" Type="text" />
+          <Property Name="City" Type="varchar" MaxLength="50" />
+          <Property Name="UserState" Type="varchar" MaxLength="50" />
+          <Property Name="Country" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="USERS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmployeeId" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="FirstLogin" Type="bit" Nullable="false" />
+          <Property Name="BranchCode" Type="varchar" MaxLength="10" />
+          <Property Name="RoutingId" Type="int" />
+          <Property Name="BloodGroupId" Type="varchar" MaxLength="4" />
+          <Property Name="Contact" Type="bigint" />
+          <Property Name="Emailid" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="Pooler_Passanger" Type="varchar" MaxLength="10" />
+          <Property Name="Create_on" Type="date" Nullable="false" />
+          <Property Name="Last_Modified_On" Type="date" />
+        </EntityType>
+        <EntityType Name="VEHICLE_INFO">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="IsPooler" Type="bit" />
+          <Property Name="Wheeler" Type="varchar" MaxLength="20" />
+          <Property Name="SeatsAvailability" Type="int" />
+          <Property Name="RouteID" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <Association Name="FK__LOGINS__UserId__66603565">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
+          <End Role="LOGINS" Type="Self.LOGINS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LOGINS">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PoolerDep__TimeO__7E37BEF6">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="0..1" />
+          <End Role="PoolerDeparture" Type="Self.PoolerDeparture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PoolerDeparture">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserAddre__UserI__6B24EA82">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
+          <End Role="UserAddress" Type="Self.UserAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserAddress">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VEHICLE_I__UserI__693CA210">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
+          <End Role="VEHICLE_INFO" Type="Self.VEHICLE_INFO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VEHICLE_INFO">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MPOOL_HackathonModelStoreContainer">
+          <EntitySet Name="BloodGroups" EntityType="Self.BloodGroups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BRANCHES" EntityType="Self.BRANCHES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LOGINS" EntityType="Self.LOGINS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Routing" EntityType="Self.Routing" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="States" EntityType="Self.States" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserAddress" EntityType="Self.UserAddress" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VEHICLE_INFO" EntityType="Self.VEHICLE_INFO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PoolerDeparture" EntityType="Self.PoolerDeparture" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PoolerDeparture].[Id] AS [Id], 
+    [PoolerDeparture].[UserId] AS [UserId], 
+    [PoolerDeparture].[Name] AS [Name], 
+    [PoolerDeparture].[RoutingID] AS [RoutingID], 
+    [PoolerDeparture].[SeatsAvailable] AS [SeatsAvailable], 
+    [PoolerDeparture].[TimeOfDeparture] AS [TimeOfDeparture]
+    FROM [dbo].[PoolerDeparture] AS [PoolerDeparture]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__LOGINS__UserId__66603565" Association="Self.FK__LOGINS__UserId__66603565">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="LOGINS" EntitySet="LOGINS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PoolerDep__TimeO__7E37BEF6" Association="Self.FK__PoolerDep__TimeO__7E37BEF6">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="PoolerDeparture" EntitySet="PoolerDeparture" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserAddre__UserI__6B24EA82" Association="Self.FK__UserAddre__UserI__6B24EA82">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="UserAddress" EntitySet="UserAddress" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VEHICLE_I__UserI__693CA210" Association="Self.FK__VEHICLE_I__UserI__693CA210">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="VEHICLE_INFO" EntitySet="VEHICLE_INFO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MPOOL_HackathonModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BloodGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BloodGroup1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="BloodGroupCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="BRANCH">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Branch1" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="BranchId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StateCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="City1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CityCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Country1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CountryCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="LOGIN">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="USER" Relationship="Self.FK__LOGINS__UserId__66603565" FromRole="LOGINS" ToRole="USERS" />
+        </EntityType>
+        <EntityType Name="Routing">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BranchId" Type="Int32" />
+          <Property Name="Routing1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="RouteID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountryCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UserState" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StateCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="UserAddress">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="UserAddress1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserState" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="USER" Relationship="Self.FK__UserAddre__UserI__6B24EA82" FromRole="UserAddress" ToRole="USERS" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmployeeId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="FirstLogin" Type="Boolean" Nullable="false" />
+          <Property Name="BranchCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="RoutingId" Type="Int32" />
+          <Property Name="BloodGroupId" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="Contact" Type="Int64" />
+          <Property Name="Emailid" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Pooler_Passanger" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Create_on" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Last_Modified_On" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="LOGINS" Relationship="Self.FK__LOGINS__UserId__66603565" FromRole="USERS" ToRole="LOGINS" />
+          <NavigationProperty Name="UserAddresses" Relationship="Self.FK__UserAddre__UserI__6B24EA82" FromRole="USERS" ToRole="UserAddress" />
+          <NavigationProperty Name="VEHICLE_INFO" Relationship="Self.FK__VEHICLE_I__UserI__693CA210" FromRole="USERS" ToRole="VEHICLE_INFO" />
+          <NavigationProperty Name="PoolerDepartures" Relationship="MPOOL_HackathonModel.FK__PoolerDep__TimeO__7E37BEF6" FromRole="USER" ToRole="PoolerDeparture" />
+        </EntityType>
+        <EntityType Name="VEHICLE_INFO">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="IsPooler" Type="Boolean" />
+          <Property Name="Wheeler" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SeatsAvailability" Type="Int32" />
+          <Property Name="RouteID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="USER" Relationship="Self.FK__VEHICLE_I__UserI__693CA210" FromRole="VEHICLE_INFO" ToRole="USERS" />
+        </EntityType>
+        <Association Name="FK__LOGINS__UserId__66603565">
+          <End Role="USERS" Type="Self.USER" Multiplicity="1" />
+          <End Role="LOGINS" Type="Self.LOGIN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LOGINS">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserAddre__UserI__6B24EA82">
+          <End Role="USERS" Type="Self.USER" Multiplicity="1" />
+          <End Role="UserAddress" Type="Self.UserAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserAddress">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VEHICLE_I__UserI__693CA210">
+          <End Role="USERS" Type="Self.USER" Multiplicity="1" />
+          <End Role="VEHICLE_INFO" Type="Self.VEHICLE_INFO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VEHICLE_INFO">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MPOOL_HackathonEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BloodGroups" EntityType="Self.BloodGroup" />
+          <EntitySet Name="BRANCHES" EntityType="Self.BRANCH" />
+          <EntitySet Name="Cities" EntityType="Self.City" />
+          <EntitySet Name="Countries" EntityType="Self.Country" />
+          <EntitySet Name="LOGINS" EntityType="Self.LOGIN" />
+          <EntitySet Name="Routings" EntityType="Self.Routing" />
+          <EntitySet Name="States" EntityType="Self.State" />
+          <EntitySet Name="UserAddresses" EntityType="Self.UserAddress" />
+          <EntitySet Name="USERS" EntityType="Self.USER" />
+          <EntitySet Name="VEHICLE_INFO" EntityType="Self.VEHICLE_INFO" />
+          <AssociationSet Name="FK__LOGINS__UserId__66603565" Association="Self.FK__LOGINS__UserId__66603565">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="LOGINS" EntitySet="LOGINS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserAddre__UserI__6B24EA82" Association="Self.FK__UserAddre__UserI__6B24EA82">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="UserAddress" EntitySet="UserAddresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VEHICLE_I__UserI__693CA210" Association="Self.FK__VEHICLE_I__UserI__693CA210">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="VEHICLE_INFO" EntitySet="VEHICLE_INFO" />
+          </AssociationSet>
+          <EntitySet Name="PoolerDepartures" EntityType="MPOOL_HackathonModel.PoolerDeparture" />
+          <AssociationSet Name="FK__PoolerDep__TimeO__7E37BEF6" Association="MPOOL_HackathonModel.FK__PoolerDep__TimeO__7E37BEF6">
+            <End Role="USER" EntitySet="USERS" />
+            <End Role="PoolerDeparture" EntitySet="PoolerDepartures" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="PoolerDeparture">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RoutingID" Type="Int32" />
+          <Property Name="SeatsAvailable" Type="Int32" />
+          <Property Name="TimeOfDeparture" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="USER" Relationship="MPOOL_HackathonModel.FK__PoolerDep__TimeO__7E37BEF6" FromRole="PoolerDeparture" ToRole="USER" />
+        </EntityType>
+        <Association Name="FK__PoolerDep__TimeO__7E37BEF6">
+          <End Type="MPOOL_HackathonModel.USER" Role="USER" Multiplicity="0..1" />
+          <End Type="MPOOL_HackathonModel.PoolerDeparture" Role="PoolerDeparture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PoolerDeparture">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MPOOL_HackathonModelStoreContainer" CdmEntityContainer="MPOOL_HackathonEntities">
+          <EntitySetMapping Name="BloodGroups">
+            <EntityTypeMapping TypeName="MPOOL_HackathonModel.BloodGroup">
+              <MappingFragment StoreEntitySet="BloodGroups">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BloodGroup1" ColumnName="BloodGroup" />
+                <ScalarProperty Name="BloodGroupCode" ColumnName="BloodGroupCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BRANCHES">
+            <EntityTypeMapping TypeName="MPOOL_HackathonModel.BRANCH">
+              <MappingFragment StoreEntitySet="BRANCHES">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Branch1" ColumnName="Branch" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="MPOOL_HackathonModel.City">
+              <MappingFragment StoreEntitySet="Cities">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StateCode" ColumnName="StateCode" />
+                <ScalarProperty Name="City1" ColumnName="City" />
+                <ScalarProperty Name="CityCode" ColumnName="CityCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="MPOOL_HackathonModel.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Country1" ColumnName="Country" />
+                <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOGINS">
+            <EntityTypeMapping TypeName="MPOOL_HackathonModel.LOGIN">
+              <MappingFragment StoreEntitySet="LOGINS">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Routings">
+            <EntityTypeMapping TypeName="MPOOL_HackathonModel.Routing">
+              <MappingFragment StoreEntitySet="Routing">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+                <ScalarProperty Name="Routing1" ColumnName="Routing" />
+                <ScalarProperty Name="RouteID" ColumnName="RouteID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="States">
+            <EntityTypeMapping TypeName="MPOOL_HackathonModel.State">
+              <MappingFragment StoreEntitySet="States">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+                <ScalarProperty Name="UserState" ColumnName="UserState" />
+                <ScalarProperty Name="StateCode" ColumnName="StateCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserAddresses">
+            <EntityTypeMapping TypeName="MPOOL_HackathonModel.UserAddress">
+              <MappingFragment StoreEntitySet="UserAddress">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserAddress1" ColumnName="UserAddress" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="UserState" ColumnName="UserState" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USERS">
+            <EntityTypeMapping TypeName="MPOOL_HackathonModel.USER">
+              <MappingFragment StoreEntitySet="USERS">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="FirstLogin" ColumnName="FirstLogin" />
+                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+                <ScalarProperty Name="RoutingId" ColumnName="RoutingId" />
+                <ScalarProperty Name="BloodGroupId" ColumnName="BloodGroupId" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Emailid" ColumnName="Emailid" />
+                <ScalarProperty Name="Pooler_Passanger" ColumnName="Pooler_Passanger" />
+                <ScalarProperty Name="Create_on" ColumnName="Create_on" />
+                <ScalarProperty Name="Last_Modified_On" ColumnName="Last_Modified_On" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VEHICLE_INFO">
+            <EntityTypeMapping TypeName="MPOOL_HackathonModel.VEHICLE_INFO">
+              <MappingFragment StoreEntitySet="VEHICLE_INFO">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="IsPooler" ColumnName="IsPooler" />
+                <ScalarProperty Name="Wheeler" ColumnName="Wheeler" />
+                <ScalarProperty Name="SeatsAvailability" ColumnName="SeatsAvailability" />
+                <ScalarProperty Name="RouteID" ColumnName="RouteID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PoolerDepartures">
+            <EntityTypeMapping TypeName="MPOOL_HackathonModel.PoolerDeparture">
+              <MappingFragment StoreEntitySet="PoolerDeparture">
+                <ScalarProperty Name="TimeOfDeparture" ColumnName="TimeOfDeparture" />
+                <ScalarProperty Name="SeatsAvailable" ColumnName="SeatsAvailable" />
+                <ScalarProperty Name="RoutingID" ColumnName="RoutingID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
