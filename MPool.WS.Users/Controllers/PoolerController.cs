@@ -14,7 +14,7 @@ using System.Web.Http.Cors;
 
 namespace MPool.WS.Users.Controllers
 {
-    [EnableCors(origins: "http://localhost:3000", headers: "*", methods: "*")]
+    [EnableCors(origins: "http://localhost:8085", headers: "*", methods: "*")]
     public class PoolerController : ApiController
     {
         public static MPOOL_HackathonEntities MpoolData = new MPOOL_HackathonEntities();
