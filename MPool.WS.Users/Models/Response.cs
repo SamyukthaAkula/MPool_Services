@@ -12,6 +12,6 @@ namespace MPool.WS.Users.Models
         public IEnumerable<LOGIN> data { set; get; }
         public IEnumerable<BRANCH> branches { set; get; }
         public IEnumerable<Routing> routes { set; get; }
-        public IEnumerable<PoolerDeparture> routes { set; get; }
+        public IEnumerable<PoolerDeparture> poolerDep { set; get; }
     }
 }

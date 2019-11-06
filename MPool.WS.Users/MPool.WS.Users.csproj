@@ -241,6 +241,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MPData.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\ParamsForBody.cs" />
     <Compile Include="Models\PoolerDeparture.cs">
       <DependentUpon>MPData.tt</DependentUpon>
     </Compile>

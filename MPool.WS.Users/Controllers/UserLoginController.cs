@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Security;
 using Microsoft.Owin.Host.SystemWeb;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Web.Http.Cors;
 
 
@@ -41,17 +42,17 @@ namespace MPool.WS.Users.Controllers
         // GET api/UserLogin/GetLogin
         [Route("api/UserLogin/GetEmployeeWithID")]
         [HttpGet]
-        public IEnumerable<LOGIN> GetEmployeeWithID(int id)
+        public IEnumerable<LOGIN> GetEmployeeWithID([FromBody]ParamsForBody par)
         {
-            var users = from l in MpoolData.LOGINS where l.UserId == id select l;
+            var users = (from l in MpoolData.LOGINS where l.UserId == par.id select l).ToList();
             return users;
         }
 
         [Route("api/UserLogin/LoginValidation")]
         [HttpPost]
-        public Response LoginValidation(string uname, string pswrd)
+        public Response LoginValidation([FromBody]ParamsForBody par)
         {
-            var user = from l1 in MpoolData.LOGINS where l1.UserName == uname && l1.UserPassword == pswrd select l1;
+            var user = from l1 in MpoolData.LOGINS where l1.UserName == par.uname && l1.UserPassword == par.pswrd select l1;
             Response res = new Response();
             //string finalres = null;
             if (user is null || user.Count() <= 0)
